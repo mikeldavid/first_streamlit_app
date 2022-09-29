@@ -31,9 +31,8 @@ try:
   if not fruit_choice:
     streamlit.error("Please select a fruit to get information.")
   else:
-    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+ fruit_choice)
-    fruityvice_normalized = pandas.json_normalize(fruityvice_response.json()) #take the JSON version of the response and normalises it
-    streamlit.dataframe(fruityvice_normalized) #output it to the screen as a table
+    back_from_function = get_fruityvice_data(fruit_choice)
+    streamlit.dataframe(back_from_function)
 
 except URLError as e:
   streamlit.error()
@@ -55,3 +54,7 @@ streamlit.write('Thanks for adding  ', add_fruit)
 my_cur.execute("INSERT INTO fruit_load_list VALUES ('from streamlist')")
 addfruit_response = requests.get("https://fruityvice.com/api/fruit/"+ add_fruit)
 
+def get_fruityvice_data(this_fruit_choice)
+  fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + this_fruit_choice)
+  fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+  return streamlit.dataframe(fruityvice_normalized)
