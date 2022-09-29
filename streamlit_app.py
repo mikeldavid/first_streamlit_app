@@ -23,6 +23,12 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 # Display the table on the page.streamlit.dataframe(my_fruit_list)
 streamlit.dataframe(fruits_to_show)
 
+# Functionalised the API reuqest
+def get_fruityvice_data(this_fruit_choice):
+  fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + this_fruit_choice)
+  fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+  return streamlit.dataframe(fruityvice_normalized)
+
 #New Section to display the fruityvice api response
 streamlit.header('Fruityvice Fruit Advice!')
 try:
@@ -54,7 +60,3 @@ streamlit.write('Thanks for adding  ', add_fruit)
 my_cur.execute("INSERT INTO fruit_load_list VALUES ('from streamlist')")
 addfruit_response = requests.get("https://fruityvice.com/api/fruit/"+ add_fruit)
 
-def get_fruityvice_data(this_fruit_choice):
-  fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + this_fruit_choice)
-  fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
-  return streamlit.dataframe(fruityvice_normalized)
