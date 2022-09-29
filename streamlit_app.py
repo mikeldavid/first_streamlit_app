@@ -54,7 +54,7 @@ streamlit.write('Thanks for adding  ', add_fruit)
 my_cur.execute("INSERT INTO fruit_load_list VALUES ('from streamlist')")
 addfruit_response = requests.get("https://fruityvice.com/api/fruit/"+ add_fruit)
 
-def get_fruityvice_data(this_fruit_choice)
+def get_fruityvice_data(this_fruit_choice):
   fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + this_fruit_choice)
   fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
   return streamlit.dataframe(fruityvice_normalized)
