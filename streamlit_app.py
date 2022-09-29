@@ -38,7 +38,7 @@ streamlit.dataframe(fruityvice_normalized)
 
 
 #do not run any code past this point 
-streamlist.stop()
+streamlit.stop()
 
 #Connecting to Snowflake
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
